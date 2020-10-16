@@ -9,6 +9,7 @@ Build OpenWrt using GitHub Actions
 [Read the details in my blog (in Chinese) | 中文教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+
 一键安装：bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_v2ray2.sh)
 
 其他
@@ -23,6 +24,28 @@ Build OpenWrt using GitHub Actions
 5. 查看SSL证书：certbot certificates，更新证书：systemctl stop nginx; certbot renew; systemctl restart nginx
 
 6. 卸载： bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_v2ray2.sh) uninstall；
+
+静态网站
+静态网站是最简单的网站，既可以上传个人作品/模板做展示站，也可以托管文件当ftp、网盘。
+
+将小说站改成静态网站的操作非常简单：编辑 /etc/nginx/conf.d/你的域名.conf 文件(你的域名换成真实域名，例如hijk.art)，删除 proxy_pass  xxxx 这一行(第28行)，然后重启Nginx。
+
+一键修改脚本：
+domain=`cat /etc/v2ray/config.json | grep Host | cut -d: -f2 | tr -d \",' '`
+confpath="/etc/nginx/conf.d/"
+if [ ! -f $confpath${domain}.conf ]; then
+  confpath="/www/server/panel/vhost/nginx/"
+fi
+sed -i '28d' ${confpath}${domain}.conf
+nginx -s reload
+
+接下来，将你的文件上传到 /usr/share/nginx/html 文件夹，就可以通过 https://你的域名/文件路径 的方式访问上传的网页或者文件了。文件上传操作可参考 Bitvise连接Linux服务器教程 或者 Mac电脑连接Linux教程。
+
+反向代理网站
+默认的小说站就是反向代理，如果你想换成其他网站，例如百度，把 /etc/nginx/conf.d/你的域名.conf 文件的 proxy_pass  xxxx 这一行(第28行)改成 proxy_pass http://www.baidu.com ，然后重启Nginx。
+
+这种建站方式简单粗暴，实践时也有一些坑。例如Nginx不支持反向代理http2的网站，如果后端网站是h2，需要设置 proxy_http_version 1.1；后端网站的一些链接可能不是相对路径，需要用 proxy_redirect 替换。等等问题本文不再细说，请参考Nginx官方文档。
+
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 
