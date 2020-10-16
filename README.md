@@ -8,7 +8,22 @@ Build OpenWrt using GitHub Actions
 
 [Read the details in my blog (in Chinese) | 中文教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 一键安装：bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_v2ray2.sh)
+
+其他
+1. 查看v2ray运行状态 / 配置：bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_v2ray2.sh) info
+
+2. v2ray管理命令：启动：systemctl start v2ray，停止：systemctl stop v2ray，重启：systemctl restart v2ray；
+
+3. nginx管理命令：测试配置文件有无错误：nginx -t，启动：systemctl start nginx，停止：systemct stop nginx，重启：systemctl restart nginx；
+
+4. 更新v2ray到最新版：bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/goV2.sh)（提示“装不上daemon”不用管，systemctl restart v2ray重新启动v2ray就好了）
+
+5. 查看SSL证书：certbot certificates，更新证书：systemctl stop nginx; certbot renew; systemctl restart nginx
+
+6. 卸载： bash <(curl -sL https://raw.githubusercontent.com/hijkpw/scripts/master/centos_install_v2ray2.sh) uninstall；
+＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 
 
 ## Usage
