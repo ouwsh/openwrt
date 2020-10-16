@@ -66,7 +66,7 @@ Build OpenWrt using GitHub Actions
 静态网站
 静态网站是最简单的网站，既可以上传个人作品/模板做展示站，也可以托管文件当ftp、网盘。
 
-将小说站改成静态网站的操作非常简单：编辑 /etc/nginx/conf.d/你的域名.conf 文件(你的域名换成真实域名，例如hijk.art)，删除 proxy_pass  xxxx 这一行(第28行)，然后重启Nginx。
+将小说站改成静态网站的操作非常简单：编辑 /etc/nginx/conf.d/你的域名.conf 文件(你的域名换成真实域名)，删除 proxy_pass  xxxx 这一行(第28行)，然后重启Nginx。xiaoshuosk
 
 一键修改脚本：
 domain=`cat /etc/v2ray/config.json | grep Host | cut -d: -f2 | tr -d \",' '`
