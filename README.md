@@ -91,4 +91,8 @@ nginx -s reload
 这种建站方式简单粗暴，实践时也有一些坑。例如Nginx不支持反向代理http2的网站，如果后端网站是h2，需要设置 proxy_http_version 1.1；后端网站的一些链接可能不是相对路径，需要用 proxy_redirect 替换。等等问题本文不再细说，请参考Nginx官方文档。
 
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+如果做旁路由，要在旁路由防火墙上添加规则，要不会很慢
+
+iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+
 
