@@ -93,6 +93,9 @@ nginx -s reload
 ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 如果做旁路由，要在旁路由防火墙上添加规则，要不会很慢
 
+注：如果用这个固件做旁路由的话不要忘了加自定义防火墙规则（网络->防火墙->自定义规则）：
 iptables -t nat -I POSTROUTING -o eth0 -j MASQUERADE
+也可以尝试（有桥接存在的情况下）
+iptables -t nat -I POSTROUTING -o  br-lan  -j MASQUERADE  
 
 
